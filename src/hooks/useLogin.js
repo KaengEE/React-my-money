@@ -14,7 +14,7 @@ export const useLogin = () => {
 
     try {
       //파이어베이스 로그인하고 인증 정보 리턴
-      const res = await fireauth.signInWithEmailAndPassword();
+      const res = await fireauth.signInWithEmailAndPassword(email, password);
 
       if (!isCancelled) {
         //로그인
