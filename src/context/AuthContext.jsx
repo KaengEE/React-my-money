@@ -6,7 +6,8 @@ export const AuthContext = createContext();
 // 리듀서 메서드
 export const authReducer = (state, action) => {
   switch (action.type) {
-    case "":
+    case "LOGIN":
+      return { ...state, user: action.payload };
     default:
       return state;
   }
@@ -17,6 +18,7 @@ export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
     user: null, //초기값
   });
+  console.log("인증 state: ", state);
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>
