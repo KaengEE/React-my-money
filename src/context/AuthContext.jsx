@@ -24,7 +24,7 @@ export const AuthContextProvider = ({ children }) => {
     user: null, //초기값
     authIsReady: false,
   });
-  console.log("인증 state: ", state);
+  //console.log("인증 state: ", state);
 
   useEffect(() => {
     // 처음 시작시 유저를  확인해서 유저정보(없으면 null)와 인증확인 액션 디스패치
