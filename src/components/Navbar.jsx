@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 //CSS모듈사용시 CSS클래스가 다른 컴포넌트에도 적용되는 것을 방지
 import styles from "./Navbar.module.css";
-import { useLogout } from "../hooks/userLogout";
+import { useLogout } from "../hooks/useLogout";
 
 export default function Navbar() {
   const { logout } = useLogout();
