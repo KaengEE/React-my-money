@@ -1,5 +1,6 @@
 import firebase from "firebase";
 import "firebase/firestore";
+import "firebase/auth";
 
 // 개인설정
 const firebaseConfig = {
@@ -17,4 +18,7 @@ firebase.initializeApp(firebaseConfig);
 // firestore의 DB서비스
 const firedb = firebase.firestore();
 
-export { firedb };
+//인증서비스
+const fireauth = firebase.auth();
+
+export { firedb, fireauth };
