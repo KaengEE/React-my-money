@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 import { fireauth } from "../firebase/config";
+//import { useNavigate } from "react-router-dom";
 
 export const useLogout = () => {
   const [error, setError] = useState();
   const [isPending, setIsPending] = useState(false);
   const [isCancelled, setIsCancelled] = useState(false);
   const { dispatch } = useAuthContext();
+  //const navigate = useNavigate();
 
   const logout = async () => {
     setError(null);
@@ -22,6 +24,7 @@ export const useLogout = () => {
       }
       setIsPending(false);
       setError(null);
+      //navigate("/login");
     } catch (err) {
       console.log(err.message);
       setError(err.message);
