@@ -22,6 +22,6 @@ const firedb = firebase.firestore();
 const fireauth = firebase.auth();
 
 //시간
-const timestamp = firedb.firestore.Timestamp;
+const timestamp = firebase.firestore.Timestamp;
 
 export { firedb, fireauth, timestamp };
