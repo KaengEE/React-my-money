@@ -1,14 +1,18 @@
 import { useState } from "react";
 import styles from "./Signup.module.css";
+import { useSignup } from "../../hooks/useSignup";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  //가입하기 hook에서 가져옴
+  const { signup, error, isPending } = useSignup();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password, name);
+    //console.log(email, password, name);
+    signup(email, password, name); //가입함수
   };
 
   return (
@@ -41,7 +45,14 @@ export default function Signup() {
           value={name}
         />
       </label>
-      <button className="btn">가입하기</button>
+      {/* 에러와 로딩 */}
+      {!isPending && <button className="btn">가입하기</button>}
+      {isPending && (
+        <button className="btn" disabled>
+          로딩중...
+        </button>
+      )}
+      {error && <p>{error}</p>}
     </form>
   );
 }
