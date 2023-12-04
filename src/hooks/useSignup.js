@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fireauth } from "../firebase/config";
 import { useAuthContext } from "./useAuthContext";
 
 export const useSignup = () => {
   const [error, setError] = useState();
   const [isPending, setIsPending] = useState(false);
+  const [isCancelled, setIsCancelled] = useState(false);
   const { dispatch } = useAuthContext();
 
   const signup = async (email, password, displayName) => {
@@ -25,8 +26,10 @@ export const useSignup = () => {
       //유저프로필에 이름 업데이트
       await res.user.updateProfile({ displayName: displayName });
 
-      //유저정보를 state에 저장
-      dispatch({ type: "LOGIN", payload: res.user });
+      if (!isCancelled) {
+        //유저정보를 state에 저장
+        dispatch({ type: "LOGIN", payload: res.user });
+      }
 
       setError(null);
       setIsPending(false);
@@ -36,6 +39,12 @@ export const useSignup = () => {
       setIsPending(false);
     }
   };
+
+  // 로그아웃 작업중 중간에 사라진다면
+  useEffect(() => {
+    setIsCancelled(false);
+    return () => setIsCancelled(true);
+  }, []);
 
   return { signup, error, isPending };
 };
