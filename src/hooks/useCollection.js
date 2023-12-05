@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
 import { firedb } from "../firebase/config";
 
-export const useCollection = (collection, query) => {
+export const useCollection = (collection, query, sortChange) => {
   const [documents, setDocuments] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     let ref = firedb.collection(collection);
 
-    //쿼리가 있으면 배열을 값으로 변환 [1,2,3] => (1,2,3)
+    // 쿼리가 있으면 배열을 값으로 변환 [1,2,3] => (1,2,3)
     if (query) {
       ref = ref.where(...query);
+    }
+
+    // 정렬 조건 적용
+    if (sortChange) {
+      ref = ref.orderBy(...sortChange);
     }
 
     const unsub = ref.onSnapshot(
@@ -30,7 +35,7 @@ export const useCollection = (collection, query) => {
     );
 
     return () => unsub();
-  }, [collection]);
+  }, [collection, sortChange]);
 
   return { documents, error };
 };
