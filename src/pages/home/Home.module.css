@@ -91,3 +91,22 @@
   font-size: 0.9em;
   cursor: pointer;
 }
+
+/* 정렬박스 */
+.content select {
+  margin-left: 8px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.selectbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.content select:focus {
+  border-color: #1f9751;
+  outline: none;
+}
