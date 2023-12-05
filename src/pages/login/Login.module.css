@@ -17,3 +17,9 @@
   color: #777;
   width: 100%;
 }
+.error-message {
+  color: #ff0000;
+  font-style: italic;
+  margin-top: 10px;
+  font-size: 0.9em;
+}

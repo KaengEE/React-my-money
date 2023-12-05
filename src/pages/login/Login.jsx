@@ -42,14 +42,8 @@ export default function Login() {
         </button>
       )}
       {error && (
-        <p>
-          {error === "INVALID_LOGIN_CREDENTIALS"
-            ? "이메일 또는 패스워드를 확인해주세요!"
-            : error === "INVALID_EMAIL"
-            ? "유효한 이메일 주소를  확인해주세요!."
-            : error === "INVALID_PASSWORD"
-            ? "유효한 패스워드를  확인해주세요!."
-            : error}
+        <p className={styles["error-message"]}>
+          이메일 또는 패스워드를 확인해주세요!
         </p>
       )}
     </form>
