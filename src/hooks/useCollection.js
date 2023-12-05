@@ -4,6 +4,8 @@ import { firedb } from "../firebase/config";
 export const useCollection = (collection, query, sortChange) => {
   const [documents, setDocuments] = useState(null);
   const [error, setError] = useState(null);
+  const [total, setTotal] = useState(0);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     let ref = firedb.collection(collection);
@@ -21,11 +23,15 @@ export const useCollection = (collection, query, sortChange) => {
     const unsub = ref.onSnapshot(
       (snapshot) => {
         let results = [];
+        let total = 0;
         snapshot.docs.forEach((doc) => {
           results.push({ ...doc.data(), id: doc.id });
+          total += parseInt(doc.data().amount); //총합
         });
 
         setDocuments(results);
+        setTotal(total);
+        setCount(results.length);
         setError(null);
       },
       (err) => {
@@ -35,7 +41,7 @@ export const useCollection = (collection, query, sortChange) => {
     );
 
     return () => unsub();
-  }, [collection, sortChange]);
+  }, [collection]);
 
-  return { documents, error };
+  return { documents, error, total, count };
 };

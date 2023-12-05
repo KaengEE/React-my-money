@@ -4,16 +4,17 @@ import { useCollection } from "../../hooks/useCollection";
 import styles from "./Home.module.css";
 import TransactionForm from "./TransactionForm";
 import TransactionList from "./TransactionList";
+import { TransactionInfo } from "./TransactionInfo";
 
 export default function Home() {
   const { user } = useAuthContext();
+
   const [sortBy, setSortBy] = useState({ by: "createdAt", order: "desc" }); // 기본값
   const { documents, error } = useCollection(
     "transactions",
     ["uid", "==", user.uid],
     [sortBy.by, sortBy.order]
   );
-
   const handleSortChange = (e) => {
     const { name, value } = e.target;
     setSortBy((prev) => ({ ...prev, [name]: value }));
@@ -39,6 +40,7 @@ export default function Home() {
       </div>
       <div className={styles.sidebar}>
         <TransactionForm uid={user.uid} />
+        <TransactionInfo />
       </div>
     </div>
   );
