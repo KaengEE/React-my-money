@@ -85,11 +85,17 @@
   background: #ddd;
   color: #777;
   border: none;
+  border-radius: 4px;
   padding: 12px 8px;
   text-align: center;
   line-height: 0;
   font-size: 0.9em;
   cursor: pointer;
+}
+
+.transactions button:hover {
+  color: #333;
+  background: #a1a1a1;
 }
 
 /* 정렬박스 */
