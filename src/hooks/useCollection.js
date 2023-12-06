@@ -41,7 +41,7 @@ export const useCollection = (collection, query, sortChange) => {
     );
 
     return () => unsub();
-  }, [collection]);
+  }, []);
 
   return { documents, error, total, count };
 };
